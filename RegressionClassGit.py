@@ -26,7 +26,7 @@ print("values taken on ",V, "\nshape of V \n",V.shape)
 
 
 def cost(w,b):
-    costArray= np.abs(((w*Xarray+b)-V)) # taking square here to eventually take sum of squares
+    costArray= ((w*Xarray+b)-V)**2 # taking square here to eventually take sum of squares
     return costArray.sum()
 #print (cost(1,1))
 
