@@ -10,7 +10,7 @@ from scipy.optimize import minimize
 import matplotlib.pyplot as plt
 
 
-rng = np.random
+rng = np.random      
 N=2 # number of different points for regression; I am only allowing values of -1 and 1
 Xarray=10*rng.randn(N)
 print("Xvalues ",Xarray,"\nshape of Xarray ",Xarray.shape)
