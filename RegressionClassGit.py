@@ -44,13 +44,14 @@ res = minimize(costWrapper,[.5,.5],method='Nelder-Mead')# this method doesnt use
 print("result is ",res)
 print(" the actual minimimum values of w, b  are ",res.x[0],res.x[1])
 print("the minimum it reached is ",res.fun)
-print("the actual answer which should give us 0 as a cost is \n ",wans,bans)
+if N== 2 and Xarray[1]!= Xarray[0] :
+    print("the actual answer which should give us 0 as a cost is \n ",wans,bans)
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 # !!!!!!!!!!!!!!!!! should change -.8 to 1 to really see more correct graph !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-w= np.arange(res.x[0]-1,res.x[0]+1,.05)  #change from 1 to -.8 to see arrays
-b= np.arange(res.x[1]-1,res.x[1]+1,.05) 
+w= np.arange(res.x[0]-2,res.x[0]+2,.05)  #change from 1 to -.8 to see arrays
+b= np.arange(res.x[1]-2,res.x[1]+2,.05) 
 W,B= meshgrid(w,b) #grid of points
 print("\n W array\n",W,"\n and shape of W \n",W.shape)
 print("\nB array\n",B,"\n and shape of B \n",B.shape)
