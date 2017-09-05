@@ -14,18 +14,25 @@ rng = np.random
 N=2 # number of different points for regression; I am only allowing values of -1 and 1
 Xarray=10*rng.randn(N)
 print("Xvalues ",Xarray,"\nshape of Xarray ",Xarray.shape)
+
 V= rng.randint(size=N, low=0, high=2)
+
 V=2*V-1  #note that the constant 2 is broadcast through the array as it should in linear algebra
 print("values taken on ",V, "\nshape of V \n",V.shape)
 
-
+if N==2 and Xarray[1]!= Xarray[0] :
+    wans= (V[1]-V[0])/(Xarray[1]-Xarray[0])
+    bans= V[0]-wans*Xarray[0]
+    
+    
 def cost(w,b):
-    costArray= ((w*Xarray+b)-V)**2 # taking square here to eventually take sum of squares
+    costArray=((w*Xarray+b)-V)**2 # taking square here to eventually take sum of squares
     return costArray.sum()
-#print (cost(1,1))
+print ("cost = \n",cost(1,1))
 
 def costWrapper(Avar):# just a wrapper function for sciPy
     return cost(Avar[0],Avar[1]) # I think I can give it an ordered pair
+print("the cost at (1,1)",cost(-2,1))
 
 #
 #vcostWrapper= np.vectorize(costWrapper)  #did not work wanted to be able to work on array of pairs
@@ -34,15 +41,16 @@ def costWrapper(Avar):# just a wrapper function for sciPy
 #print("usingwrapper ", costWrapper([1,1]))
 #find the minimum from sciPy ; sort of ridiculous for square as is normal regression you can solve analytically
 res = minimize(costWrapper,[.5,.5],method='Nelder-Mead')# this method doesnt use derivatives
-
+print("result is ",res)
 print(" the actual minimimum values of w, b  are ",res.x[0],res.x[1])
 print("the minimum it reached is ",res.fun)
+print("the actual answer which should give us 0 as a cost is \n ",wans,bans)
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 # !!!!!!!!!!!!!!!!! should change -.8 to 1 to really see more correct graph !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-w= np.arange(res.x[0]-1,res.x[0]-.8,.05)  #change from 1 to -.8 to see arrays
-b= np.arange(res.x[1]-1,res.x[1]-.8,.05) 
+w= np.arange(res.x[0]-1,res.x[0]+1,.05)  #change from 1 to -.8 to see arrays
+b= np.arange(res.x[1]-1,res.x[1]+1,.05) 
 W,B= meshgrid(w,b) #grid of points
 print("\n W array\n",W,"\n and shape of W \n",W.shape)
 print("\nB array\n",B,"\n and shape of B \n",B.shape)
