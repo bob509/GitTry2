@@ -6,6 +6,7 @@ Created on Sep 6, 2017
 import numpy as np
 
 # difference between a list and a 1d array and a range
+#class 3 material
 ri = range(12)
 print ("trying to print a range object \n", ri)# it is an iterator
 li= list(ri) # converting to list
