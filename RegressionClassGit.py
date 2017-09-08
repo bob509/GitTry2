@@ -32,7 +32,8 @@ def cost(w,b):
 
 def costWrapper(Avar):# just a wrapper function for sciPy
     return cost(Avar[0],Avar[1]) # I think I can give it an ordered pair
-
+def cost1(a,b):# to test the plot
+    return a*b
 
 #
 #vcostWrapper= np.vectorize(costWrapper)  #did not work wanted to be able to work on array of pairs
@@ -50,8 +51,10 @@ print("\n the answer from regression slope, intercept,error is \n",slope,interce
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 # !!!!!!!!!!!!!!!!! should change -.8 to 1 to really see more correct graph !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-w= np.arange(res.x[0]-2,res.x[0]+2,.05)  #change from 1 to -.8 to see arrays
-b= np.arange(res.x[1]-2,res.x[1]+2,.05) 
+#w= np.arange(res.x[0]-2,res.x[0]+2,.05)  #change from 1 to -.8 to see arrays
+#b= np.arange(res.x[1]-2,res.x[1]+2,.05) 
+w= np.arange(-10,10,.05)  #change from 1 to -.8 to see arrays
+b= np.arange(-10,10,.05)
 W,B= meshgrid(w,b) #grid of points
 print("\n W array\n",W,"\n and shape of W \n",W.shape)
 print("\nB array\n",B,"\n and shape of B \n",B.shape)
@@ -66,7 +69,7 @@ print("\nB array\n",B,"\n and shape of B \n",B.shape)
 # print("\n reshaped array of z values \n",ZtempA)
 #===============================================================================
 
-zs=np.array([cost(w,b)for w,b in zip(np.ravel(W),np.ravel(B))]) #note is iterator
+zs=np.array([cost1(w,b)for w,b in zip(np.ravel(W),np.ravel(B))]) #note is iterator
 Z = zs.reshape(W.shape)
 print(" \n  the Z after applying function \n",Z,"\n and shape of Z \n",Z.shape)   
 
