@@ -1,6 +1,6 @@
+
 '''
 Created on Sep 1, 2017
-
 @author: bob
 '''
 import numpy as np
@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from scipy import stats
 
 rng = np.random      
-N=5 # number of different points for regression; I am only allowing values of -1 and 1
+N=2 # number of different points for regression; I am only allowing values of -1 and 1
 Xarray=10*rng.randn(N)
 print("Xvalues ",Xarray,"\nshape of Xarray ",Xarray.shape)
 Vlow=-10;Vhigh=10 #originally 0 and 2 to mimic perceptron 
@@ -48,13 +48,24 @@ print("the minimum it reached is ",res.fun)
 if N== 2 and Xarray[1]!= Xarray[0] :
     print("the actual answer which should give us 0 as a cost is \n ",wans,bans)
 print("\n the answer from regression slope, intercept,error is \n",slope,intercept,cost(slope,intercept))
+# lets checkout how w and b grow
+incr=1
+#===============================================================================
+# print("growth of w and b around mininimizer inxcrements of \n", incr)
+# for i in range(0,10,incr):
+#     print("cost from w increments ", cost(res.x[0]+i,res.x[1]))
+#     print("cost from b increments ", cost(res.x[0],res.x[1]+i))
+#===============================================================================
+    
+
+
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 # !!!!!!!!!!!!!!!!! should change -.8 to 1 to really see more correct graph !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#w= np.arange(res.x[0]-2,res.x[0]+2,.05)  #change from 1 to -.8 to see arrays
-#b= np.arange(res.x[1]-2,res.x[1]+2,.05) 
-w= np.arange(-10,10,.05)  #change from 1 to -.8 to see arrays
-b= np.arange(-10,10,.05)
+w= np.arange(res.x[0]-2,res.x[0]+2,.05)  #change from 1 to -.8 to see arrays
+b= np.arange(res.x[1]-2,res.x[1]+2,.05) 
+#w= np.arange(-10,10,.05)  #change from 1 to -.8 to see arrays
+#b= np.arange(-10,10,.05)
 W,B= meshgrid(w,b) #grid of points
 print("\n W array\n",W,"\n and shape of W \n",W.shape)
 print("\nB array\n",B,"\n and shape of B \n",B.shape)
@@ -69,7 +80,7 @@ print("\nB array\n",B,"\n and shape of B \n",B.shape)
 # print("\n reshaped array of z values \n",ZtempA)
 #===============================================================================
 
-zs=np.array([cost1(w,b)for w,b in zip(np.ravel(W),np.ravel(B))]) #note is iterator
+zs=np.array([cost(w,b)for w,b in zip(np.ravel(W),np.ravel(B))]) #note is iterator
 Z = zs.reshape(W.shape)
 print(" \n  the Z after applying function \n",Z,"\n and shape of Z \n",Z.shape)   
 
